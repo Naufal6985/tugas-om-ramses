@@ -1,34 +1,20 @@
-nama_agen = input("Masukan Nama Agen:\n")
-id_agen = int(input("Masukan ID Agen:\n"))
-password_agen = input("Masukan Sandi Agen:\n")
+nama = input("Masukan Nama: ")
+id = input("Masukan ID: ")
+sandi = input("Sandi: ")
 
+def validasi(nama, id, sandi):
+    if not nama.strip():
+        return False, "Nama kosong"
+    if not id.isdigit() or not 1000 <= int(id) <= 9999:
+        return False, "ID harus 4 digit"
+    if len(sandi) < 8 or ("!" not in sandi and "?" not in sandi):
+        return False, "Sandi tidak valid"
+    return True, "Valid"
 
-def aku_butuh_validasi(nama, id_agen, sandi):
-    if not nama:
-        return False, "Nama gaboleh kosong"
+hasil = validasi(nama, id, sandi)
 
-    if not (1000 <= id_agen <= 9999):
-        return False, "ID agen harus 4 digit angka."
-
-    if len(sandi) < 8:
-        return False, "sandi minimal 8 karakter."
-
-    if "!" not in sandi and "?" not in sandi:
-        return False, "Kata sandi harus ada karakter ! atau ?."
-
-    return True, "Anjay valid."
-
-
-akses, pesan = aku_butuh_validasi(
-    nama_agen,
-    id_agen,
-    password_agen
-)
-
-
-if akses:
-    print("helo world")
-    print(pesan)
+if hasil[0]:
+    print("AKSES DITERIMA")
 else:
-    print("ditolak")
-    print(pesan)
+    print("AKSES DITOLAK")
+print(hasil[1])
